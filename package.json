@@ -1,0 +1,14 @@
+{
+  "name": "ethernaut",
+  "version": "1.0.0",
+  "description": "Solving Ethernaut game levels",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pedro Reyes",
+  "license": "ISC",
+  "devDependencies": {
+    "hardhat": "2.9.9"
+  }
+}
