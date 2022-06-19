@@ -18,6 +18,20 @@ node scripts/sample-script.js
 npx hardhat help
 ```
 
+## Connecting a wallet or Dapp to Hardhat Network
+
+Running hardhat node locally with
+
+`npx hardhat node`
+
+Connect to it and run deployment scrips with
+
+`npx hardhat run scripts/sample-script.js --network localhost`
+
+## Running tests with hardhat
+
+Run `npx hardhat test`
+
 # Commands history
 
 ## Init node project
@@ -35,3 +49,7 @@ Run `npx hardhat` and select `Create a sample project`
 Installing dependencies:
 
 `npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers`
+
+## Installing OpenZeppelin contracts
+
+Run `npm install @openzeppelin/contracts`
