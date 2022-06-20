@@ -35,3 +35,11 @@ Run `npx hardhat` and select `Create a sample project`
 Installing dependencies:
 
 `npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers`
+
+## Verifyint contracts
+
+- Programatically
+  `npx hardhat verify --network rinkeby 0xB51B1ABF43236cB53D434374E98e89f94Daa249a`
+
+- Command line
+  `await hre.run("verify:verify", { address: hackFlip.address });`

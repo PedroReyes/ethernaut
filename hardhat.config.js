@@ -1,4 +1,12 @@
 require("@nomiclabs/hardhat-waffle");
+require("@nomiclabs/hardhat-etherscan");
+const { task } = require("hardhat/config");
+const {
+  DEPLOYER_PRIVATE_KEY,
+  INFURA_TESTNET_RINKEBY,
+  ETHERSCAN_API_KEY,
+  BSCSCAN_API_KEY,
+} = require("./env.json");
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -17,5 +25,55 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.8.4",
+  defaultNetwork: "ropsten", // default: "hardhat"
+
+  networks: {
+    hardhat: {},
+    rinkeby: {
+      url: "https://rinkeby.infura.io/v3/" + INFURA_TESTNET_RINKEBY,
+      accounts: [DEPLOYER_PRIVATE_KEY],
+    },
+    goerli: {
+      url: "https://goerli.infura.io/v3/" + INFURA_TESTNET_RINKEBY,
+      accounts: [DEPLOYER_PRIVATE_KEY],
+    },
+    ropsten: {
+      url: "https://ropsten.infura.io/v3/" + INFURA_TESTNET_RINKEBY,
+      accounts: [DEPLOYER_PRIVATE_KEY],
+    },
+  },
+
+  solidity: {
+    compilers: [
+      {
+        version: "0.8.10",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 1000,
+          },
+        },
+      },
+    ],
+  },
+
+  etherscan: {
+    // Your API key for Etherscan
+    // Obtain one at https://etherscan.io/
+    apiKey: {
+      rinkeby: ETHERSCAN_API_KEY,
+      goerli: ETHERSCAN_API_KEY,
+      ropsten: ETHERSCAN_API_KEY,
+    },
+    customChains: [
+      {
+        network: "rinkeby",
+        chainId: 4,
+        urls: {
+          apiURL: "https://api-rinkeby.etherscan.io/api",
+          browserURL: "https://rinkeby.etherscan.io",
+        },
+      },
+    ],
+  },
 };
