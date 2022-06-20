@@ -14,12 +14,23 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  const Greeter = await hre.ethers.getContractFactory("Greeter");
-  const greeter = await Greeter.deploy("Hello, Hardhat!");
+  const HackFlip = await hre.ethers.getContractFactory("HackFlip");
+  const hackFlip = await HackFlip.deploy();
 
-  await greeter.deployed();
+  await hackFlip.deployed();
 
-  console.log("Greeter deployed to:", greeter.address);
+  console.log("✅ HackFlip deployed to:", hackFlip.address);
+
+  // Sleep for 15 seconds to allow the contract to be deployed
+  await new Promise((r) => setTimeout(r, 15000));
+
+  // Verify contract deployment
+  try {
+    await hre.run("verify:verify", { address: hackFlip.address });
+  } catch (error) {
+    // console.error("🔴 Error ocurred while verifying. Check manually");
+    console.error(error);
+  }
 }
 
 // We recommend this pattern to be able to use async/await everywhere
