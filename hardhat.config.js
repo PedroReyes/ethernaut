@@ -22,13 +22,17 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 module.exports = {
   defaultNetwork: "rinkeby", // default: "hardhat"
 
+  mocha: {
+    timeout: 120000,
+  },
+
   networks: {
     hardhat: {},
     rinkeby: {
       url: "https://rinkeby.infura.io/v3/" + process.env.INFURA_ID,
       accounts: [
-        process.env.DEPLOYER_PRIVATE_KEY,
         process.env.HACKER_PRIVATE_KEY,
+        process.env.DEPLOYER_PRIVATE_KEY,
       ],
       timeout: 120000,
     },

