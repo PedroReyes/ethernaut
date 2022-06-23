@@ -1,5 +1,6 @@
 require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-etherscan");
+require("@nomiclabs/hardhat-solhint");
 const { task } = require("hardhat/config");
 require("dotenv").config();
 
