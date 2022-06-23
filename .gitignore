@@ -14,8 +14,8 @@ coverage.json
 typechain
 
 #Hardhat files
-cache
-artifacts
+# cache
+# artifacts
 
 # ==============================================================================================
 # 🟢 Created by https://www.toptal.com/developers/gitignore/api/node,solidity,soliditytruffle

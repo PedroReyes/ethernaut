@@ -1,0 +1,161 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "C:\\blockchain\\ethernaut\\contracts\\3_CoinFlip\\CoinFlip.sol": {
+      "lastModificationDate": 1656006730681,
+      "contentHash": "caf9f7866920edc140fce28380b8f68c",
+      "sourceName": "contracts/3_CoinFlip/CoinFlip.sol",
+      "solcConfig": {
+        "version": "0.8.10",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 1000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": false
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.10"
+      ],
+      "artifacts": [
+        "CoinFlip"
+      ]
+    },
+    "C:\\blockchain\\ethernaut\\contracts\\3_CoinFlip\\HackFlip.sol": {
+      "lastModificationDate": 1656005914459,
+      "contentHash": "1a622a9c86b7404b6e8f630aa7caf29e",
+      "sourceName": "contracts/3_CoinFlip/HackFlip.sol",
+      "solcConfig": {
+        "version": "0.8.10",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 1000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": false
+          }
+        }
+      },
+      "imports": [
+        "./CoinFlip.sol"
+      ],
+      "versionPragmas": [
+        "0.8.10"
+      ],
+      "artifacts": [
+        "HackFlip"
+      ]
+    },
+    "C:\\blockchain\\ethernaut\\contracts\\4_Telephone\\HackTelephone.sol": {
+      "lastModificationDate": 1656005914460,
+      "contentHash": "129cc6189fe001c808176aaf972d5065",
+      "sourceName": "contracts/4_Telephone/HackTelephone.sol",
+      "solcConfig": {
+        "version": "0.8.10",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 1000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": false
+          }
+        }
+      },
+      "imports": [
+        "./Telephone.sol"
+      ],
+      "versionPragmas": [
+        "0.8.10"
+      ],
+      "artifacts": [
+        "HackTelephone"
+      ]
+    },
+    "C:\\blockchain\\ethernaut\\contracts\\4_Telephone\\Telephone.sol": {
+      "lastModificationDate": 1656005914461,
+      "contentHash": "a6ad876672e69587b4e672148b94e442",
+      "sourceName": "contracts/4_Telephone/Telephone.sol",
+      "solcConfig": {
+        "version": "0.8.10",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 1000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": false
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.10"
+      ],
+      "artifacts": [
+        "Telephone"
+      ]
+    }
+  }
+}
