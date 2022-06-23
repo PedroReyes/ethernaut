@@ -6,28 +6,32 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/access/AccessControlEnumerable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 
-/// @title A vault for storing ether and tokens
 /// @author Pedro Reyes
-/// @notice This contract is for those weak hands that cannot hold!!
+/// @title A vault for storing ether and tokens
+/// @notice 😊 This contract is for those weak hands that cannot hold!!
+/// @dev 💻 This contract is used by contract A and B to establish/as a helper/etc . . .
+/// @custom:experimental This is an experimental contract.
 contract Vault is AccessControlEnumerable, Pausable {
-    // 👨‍👩‍👦 Role-Based Access control
+    /// @dev 👨‍👩‍👦 Role-Based Access control - ADMIN role
     bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
+    /// @dev 👨‍👩‍👦 Role-Based Access control - SWEEPER role
     bytes32 public constant SWEEPER_ROLE = keccak256("SWEEPER_ROLE");
 
-    // 💸 Owner => Token => Deposit
+    /// @dev 💸 Owner => Token => Deposit
     mapping(address => VaultDeposit[]) public vaultDeposits;
 
+    /// @dev 📦 Struct for storing token and deposit info - ❌ Not displayed in docgen
     struct VaultDeposit {
         uint256 amount;
         uint256 lockEndTime;
         address token;
     }
 
-    // 💰 Income
+    /// @dev 💰 Income
     uint256 public feePercentage;
     mapping(address => uint256) public feesCollectedPerToken;
 
-    // 🔨
+    /// @dev 🔨 We setup roles and an initial fee commision for each operation
     constructor() {
         // Grant the contract deployer the default admin role: it will be able
         // to grant and revoke any roles
@@ -40,10 +44,12 @@ contract Vault is AccessControlEnumerable, Pausable {
         feePercentage = 15; //  0.15%
     }
 
-    /// @dev User can make individual deposits that will be locked for a certain time
-    /// @param _token - ERC20 token address. address(0) if sending ether
-    /// @param _amount - bigger than zero if sending ERC20 tokens
-    /// @param _lockedTime - bigger than zero if sending ERC20 tokens. Example, 1 minute, 1 hour, 1 day
+    /**
+     * @dev ✍ Write - User can make individual deposits that will be locked for a certain time
+     * @param _token - ERC20 token address. address(0) if sending ether
+     * @param _amount - bigger than zero if sending ERC20 tokens
+     * @param _lockedTime - bigger than zero if sending ERC20 tokens. Example, 1 minute, 1 hour, 1 day
+     */
     function deposit(
         address _token,
         uint256 _amount,
@@ -69,13 +75,7 @@ contract Vault is AccessControlEnumerable, Pausable {
         emit Deposit(msg.sender, _token, _amount);
     }
 
-    /// @dev Get fee for an amount of tokens
-    /// @param _amount - bigger than zero if sending ERC20 tokens
-    function getFee(uint256 _amount) public view returns (uint256) {
-        return (_amount * feePercentage) / 10000;
-    }
-
-    /// @dev You can withdraw ERC20
+    /// @dev ✍ Write - You can withdraw ERC20
     function withdraw(
         address _token,
         uint256 _amount,
@@ -109,15 +109,7 @@ contract Vault is AccessControlEnumerable, Pausable {
         emit Withdraw(msg.sender, _token, _amount);
     }
 
-    /// @dev Set the fee when user make a deposit
-    function setFee(uint256 _fee) public {
-        // Check that the calling account has the minter role
-        require(hasRole(ADMIN_ROLE, msg.sender), "Caller is not ADMIN_ROLE");
-
-        feePercentage = _fee;
-    }
-
-    /// @dev Sweep all the tokens from the vault
+    /// @dev ✍ Write - Sweep all the tokens from the vault
     // TODO: Next version add an address that will be the recipient of the sweep
     function sweep(address _token) public {
         require(
@@ -132,7 +124,21 @@ contract Vault is AccessControlEnumerable, Pausable {
         }
     }
 
-    /// @dev Get the deposits of a specific user
+    /// @dev ✍ Write - Set the fee when user make a deposit
+    function setFee(uint256 _fee) public {
+        // Check that the calling account has the minter role
+        require(hasRole(ADMIN_ROLE, msg.sender), "Caller is not ADMIN_ROLE");
+
+        feePercentage = _fee;
+    }
+
+    /// @dev 👁‍🗨 Read - Get fee for an amount of tokens
+    /// @param _amount - bigger than zero if sending ERC20 tokens
+    function getFee(uint256 _amount) public view returns (uint256) {
+        return (_amount * feePercentage) / 10000;
+    }
+
+    /// @dev 👁‍🗨 Read - Get the deposits of a specific user
     function getUserDeposits(address user)
         external
         view
@@ -141,19 +147,19 @@ contract Vault is AccessControlEnumerable, Pausable {
         return vaultDeposits[user];
     }
 
-    /// @dev Pause the smart contract
+    /// @dev 👁‍🗨 Getter - Pause the smart contract
     function pause() public onlyRole(ADMIN_ROLE) {
         _pause();
     }
 
-    /// @dev Unpause the smart contract
+    /// @dev 👁‍🗨 Getter - Unpause the smart contract
     function unpause() public onlyRole(ADMIN_ROLE) {
         _unpause();
     }
 
     // 📧 Events
     /**
-     * @dev Emitted when `value` tokens are moved from one account (`from`) to
+     * @dev 📧 Event - Emitted when `value` tokens are moved from one account (`from`) to
      * another (`to`).
      *
      * Note that `value` may be zero.
@@ -161,7 +167,7 @@ contract Vault is AccessControlEnumerable, Pausable {
     event Deposit(address indexed from, address token, uint256 value);
 
     /**
-     * @dev Emitted when `value` tokens are moved from one account (`from`) to
+     * @dev 📧 Event - Emitted when `value` tokens are moved from one account (`from`) to
      * another (`to`).
      *
      * Note that `value` may be zero.

@@ -18,6 +18,6 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "4.6.0",
-    "solidity-docgen": "v0.6.0-beta.16"
+    "solidity-docgen": "0.6.0-beta.20"
   }
 }
