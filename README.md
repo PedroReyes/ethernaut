@@ -50,4 +50,4 @@ Run `npx hardhat run scripts/4_Telephone.js`
 
 ###### Running a test script
 
-Run `npx hardhat test/4_TelephoneTest.js --network hardhat`. You can try in Rinkeby but you might run into timeouts due to slow block processing.
+Run `npx hardhat test test/4_TelephoneTest.js --network hardhat`. You can try in Rinkeby but you might run into timeouts due to slow block processing.
