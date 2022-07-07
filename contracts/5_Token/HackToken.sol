@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.10;
+pragma solidity 0.8.7;
 
 import "hardhat/console.sol";
 
@@ -12,30 +12,34 @@ contract HackToken {
     mapping(address => uint8) balances;
     uint8 public totalSupply;
 
-    constructor(uint8 _initialSupply) {
-        balances[msg.sender] = totalSupply = _initialSupply;
+    constructor(uint8 initialSupply) {
+        balances[msg.sender] = totalSupply = initialSupply;
     }
 
-    function transfer(address _to, uint8 _value) public returns (bool) {
+    function transfer(address to, uint8 value) external returns (bool) {
         unchecked {
-            require(balances[msg.sender] - _value >= 0);
-            balances[msg.sender] -= _value;
-            balances[_to] += _value;
+            // ❌ Problem
+            // require(balances[msg.sender] - value >= 0);
+            // ✅ Audit recommendation:
+            require(balances[msg.sender] >= value);
+
+            balances[msg.sender] -= value;
+            balances[to] += value;
 
             // 🗣 Logging status
-            console.log("Require: ", balances[msg.sender] - _value);
+            console.log("Require: ", balances[msg.sender] - value);
             console.log("msg.sender balance: ", balances[msg.sender]);
-            console.log("to balance: ", balances[_to]);
+            console.log("to balance: ", balances[to]);
         }
 
         return true;
     }
 
-    function balanceOf(address _owner) public view returns (uint8 balance) {
-        return balances[_owner];
+    function balanceOf(address owner) external view returns (uint8 balance) {
+        return balances[owner];
     }
 
-    function setBalance(address _owner, uint8 _balance) public {
-        balances[_owner] = _balance;
+    function setBalance(address owner, uint8 balance) external {
+        balances[owner] = balance;
     }
 }

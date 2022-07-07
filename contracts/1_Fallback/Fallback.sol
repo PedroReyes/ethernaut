@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.10;
+pragma solidity 0.8.7;
 
 contract Fallback {
     mapping(address => uint256) public contributions;
@@ -15,7 +15,7 @@ contract Fallback {
         _;
     }
 
-    function contribute() public payable {
+    function contribute() external payable {
         require(msg.value < 0.001 ether);
         contributions[msg.sender] += msg.value;
         if (contributions[msg.sender] > contributions[owner]) {
@@ -23,11 +23,11 @@ contract Fallback {
         }
     }
 
-    function getContribution() public view returns (uint256) {
+    function getContribution() external view returns (uint256) {
         return contributions[msg.sender];
     }
 
-    function withdraw() public onlyOwner {
+    function withdraw() external onlyOwner {
         owner.transfer(address(this).balance);
     }
 

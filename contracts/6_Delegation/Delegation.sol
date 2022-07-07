@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.10;
+pragma solidity 0.8.7;
 
 import "./Delegate.sol";
 import "hardhat/console.sol";
@@ -31,6 +31,7 @@ contract Delegation {
         /// @custom:link https://docs.soliditylang.org/en/v0.8.15/types.html?#members-of-addresses
         /// @custom:link https://docs.soliditylang.org/en/v0.8.12/abi-spec.html#function-selector
         /// @custom:link https://es.wikipedia.org/wiki/Sistema_hexadecimal
+        //slither-disable-next-line controlled-delegatecall,low-level-calls
         (bool success, bytes memory returndata) = address(delegate)
             .delegatecall(msg.data);
 
@@ -46,10 +47,10 @@ contract Delegation {
         // (bool success, bytes memory returndata) = address(delegate)
         //     .delegatecall(abi.encodeWithSignature("pwn(address)", _owner));
 
-        if (success) {
-            /// @custom:link https://docs.soliditylang.org/en/latest/units-and-global-variables.html#contract-related
-            this;
-        }
+        // if (success) {
+        //     /// @custom:link https://docs.soliditylang.org/en/latest/units-and-global-variables.html#contract-related
+        //     this;
+        // }
 
         // 📖 Important notes
         // In EVM it has 2^256 slot in Smart Contract storage and
@@ -57,13 +58,14 @@ contract Delegation {
         // EVM assign slot number to the field variables.
 
         // If the function call reverted
-        if (success == false) {
+        if (!success) {
             // if there is a return reason string
             // 📖 https://solidity-es.readthedocs.io/es/latest/assembly.html#sintaxis
             // 📖 https://docs.soliditylang.org/en/v0.8.12/types.html#fixed-size-byte-arrays
             if (returndata.length > 0) {
                 // bubble up any reason for revert
                 // 📖 https://jeancvllr.medium.com/solidity-tutorial-all-about-assembly-5acdfefde05c
+                //slither-disable-next-line assembly
                 assembly {
                     // 📖 https://solidity-es.readthedocs.io/es/latest/assembly.html#sintaxis
                     // 📖 https://solidity-es.readthedocs.io/es/latest/assembly.html#opcodesj

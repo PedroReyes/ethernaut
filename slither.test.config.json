@@ -1,0 +1,12 @@
+{
+  "detectors_to_run": "all",
+  "printers_to_run": "human-summary",
+  "detectors_to_exclude": "naming-convention,assembly",
+  "exclude_informational": false,
+  "exclude_low": false,
+  "exclude_medium": false,
+  "exclude_high": false,
+  "disable_color": false,
+  "filter_paths": "(mocks/|test/|hardhat|openzeppelin)",
+  "legacy_ast": false
+}

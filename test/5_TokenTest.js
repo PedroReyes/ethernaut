@@ -1,12 +1,15 @@
+process.env.NODE_ENV = "test";
+
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+const { log } = require("./Utils");
 
-describe("Token", function () {
+describe("📗 Token", function () {
   let owner;
   let hacker;
   let hacker2;
 
-  it("Should increase hacker balance", async function () {
+  it("🤓 Should increase hacker balance", async function () {
     // 🔨 Addresses
     [owner, hacker, hacker2] = await ethers.getSigners();
 
@@ -20,8 +23,8 @@ describe("Token", function () {
     let supply = await token.totalSupply();
     let hackerBalanceBeforeAttack = await token.balanceOf(hacker.address);
 
-    console.log(`💰 Supply:\n ${supply} \n`);
-    console.log(`💰 Hacker balance:\n ${hackerBalanceBeforeAttack} \n`);
+    log(`💰 Supply:\n ${supply} \n`);
+    log(`💰 Hacker balance:\n ${hackerBalanceBeforeAttack} \n`);
 
     // 👿 Hacking the contract
     const hackValue = ethers.BigNumber.from(hackerBalanceBeforeAttack)
@@ -37,8 +40,8 @@ describe("Token", function () {
 
     // 🗣 Logging status
     let hackerBalanceAfterAttack = await token.balanceOf(hacker.address);
-    console.log(`💰 Supply:\n ${supply} \n`);
-    console.log(`💰 Hacker balance:\n ${hackerBalanceAfterAttack} \n`);
+    log(`💰 Supply:\n ${supply} \n`);
+    log(`💰 Hacker balance:\n ${hackerBalanceAfterAttack} \n`);
 
     // ✅ Check if the hack was successful
     expect(hackerBalanceAfterAttack).to.gt(hackerBalanceBeforeAttack);

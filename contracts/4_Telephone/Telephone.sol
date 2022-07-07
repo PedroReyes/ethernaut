@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.10;
+pragma solidity 0.8.7;
 
 contract Telephone {
     address public owner;
@@ -8,9 +8,10 @@ contract Telephone {
         owner = msg.sender;
     }
 
-    function changeOwner(address _owner) public {
+    function changeOwner(address newOwner) external {
+        require(newOwner != address(0), "Invalid address");
         if (tx.origin != msg.sender) {
-            owner = _owner;
+            owner = newOwner;
         }
     }
 }
