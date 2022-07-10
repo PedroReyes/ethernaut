@@ -4,7 +4,9 @@
   "description": "Solving Ethernaut game levels",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install",
+    "pre-commit": "node husky/docgen.mjs"
   },
   "author": "Pedro Reyes",
   "license": "ISC",
@@ -14,7 +16,8 @@
     "chai": "4.3.6",
     "ethereum-waffle": "3.4.4",
     "ethers": "5.6.9",
-    "hardhat": "2.9.9"
+    "hardhat": "2.9.9",
+    "husky": "8.0.1"
   },
   "dependencies": {
     "@openzeppelin/contracts": "4.6.0",
