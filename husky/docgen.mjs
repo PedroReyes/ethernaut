@@ -1,9 +1,6 @@
+import hre from "hardhat";
 import fs from "fs";
 import { docgen } from "solidity-docgen";
-
-console.log(
-  "🟡 This is a beta version of docgen.js. It is not yet production ready."
-);
 
 const config = {
   /**
@@ -67,11 +64,26 @@ const config = {
 };
 
 try {
-  const json = JSON.parse(
-    fs.readFileSync("artifacts/contracts/Vault.sol/Vault.json")
-  );
-
+  // 👉 Generate documentation ( VERSION from the docs)
+  // const json = JSON.parse(
+  //   fs.readFileSync("artifacts/contracts/Vault.sol/Vault.json")
+  // );
   // await docgen([{ output: json }, config]);
+
+  console.log(
+    "⚠ This is a beta version of docgen.js. It is not yet production ready."
+  );
+  console.log("🔨 Generating documentation...");
+
+  // 🗑 delete directories to have a from-scratch documentation generation
+  console.log("🔨 Deleting artifacts and docs folders...");
+  fs.rmdirSync("./docs", { recursive: true });
+  fs.rmdirSync("./artifacts", { recursive: true });
+
+  // 👉 Generate documentation ( VERSION suggested by @frangio)
+  hre.run("docgen");
+
+  console.log("🟢 Documentation generated successfully");
 } catch (e) {
   console.log(e);
 }

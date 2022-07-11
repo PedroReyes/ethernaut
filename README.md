@@ -18,7 +18,7 @@ node scripts/sample-script.js
 npx hardhat help
 ```
 
-## Connecting a wallet or Dapp to Hardhat Network
+###### Connecting a wallet or Dapp to Hardhat Network
 
 Running hardhat node locally with
 
@@ -28,21 +28,21 @@ Connect to it and run deployment scrips with
 
 `npx hardhat run scripts/sample-script.js --network localhost`
 
-## Running tests with hardhat
+###### Running tests with hardhat
 
 Run `npx hardhat test`
 
 # Commands history
 
-## Init node project
+#### Init node project
 
 Run `npm init` and just press p all the way until the `package.json` file is created
 
-## Installing hardhat
+#### Installing hardhat
 
 `npm install --save-dev hardhat`
 
-## Creating a sample project
+#### Creating a sample project
 
 Run `npx hardhat` and select `Create a sample project`
 
@@ -50,6 +50,18 @@ Installing dependencies:
 
 `npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers`
 
-## Installing OpenZeppelin contracts
+#### Installing OpenZeppelin contracts
 
 Run `npm install @openzeppelin/contracts`
+
+#### Documentation
+
+Uniswap uses solidity-docgen for the generation of his documentation: https://github.com/Uniswap/docs/tree/400e0d7c52cab461218abc00e40120c9606b7678
+
+Run `npx hardhat docgen`
+
+# Husky/Git hooks
+
+#### Running hook manually
+
+You can run manually the hook doing `node husky/docgen.mjs`

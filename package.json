@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install",
-    "pre-commit": "node husky/docgen.mjs"
+    "pre-commit": "node husky/docgen.mjs && git add docs"
   },
   "author": "Pedro Reyes",
   "license": "ISC",
@@ -21,6 +21,6 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "4.6.0",
-    "solidity-docgen": "0.6.0-beta.20"
+    "solidity-docgen": "0.6.0-beta.22"
   }
 }
