@@ -6,7 +6,7 @@ describe("Force", function () {
   let hacker;
   let tester;
 
-  it("Should hack fallback function for claiming contract ownership", async function () {
+  it("Should force the transfer of ethers using selfdestruct", async function () {
     // 🔨 Addresses
     [deployer, hacker, tester] = await ethers.getSigners();
 
