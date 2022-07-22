@@ -51,3 +51,18 @@ Run `npx hardhat run scripts/4_Telephone.js`
 ###### Running a test script
 
 Run `npx hardhat test test/4_TelephoneTest.js --network hardhat`. You can try in Rinkeby but you might run into timeouts due to slow block processing.
+
+###### Inline bookmarks extension
+
+Use this bookmarks in order to do a follow up of which functions from a smart contract you already audited:
+
+```
+// @audit just for testig
+// @audit-ok message here
+// @audit-issue issue explained here
+// @audit-info message here
+// @todo message here
+// @note message here
+// @remind message here
+// @follow-up message here
+```
