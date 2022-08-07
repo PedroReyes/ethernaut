@@ -20,14 +20,29 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  defaultNetwork: "rinkeby", // default: "hardhat"
+  defaultNetwork: "rinkeby", // default: "hardhat",
 
   mocha: {
     timeout: 120000,
   },
 
   networks: {
-    hardhat: {},
+    hardhat: {
+      // 👉 For using the local node by default you have
+      // to comment the forking section
+      // 👉 You can execute a local node with info from the
+      // blockchain you want to fork by uncomment the next lines
+      // `npx hardhat node` for running local node
+      // url: "http://localhost:8545",
+      // timeout: 520000,
+      // forking: {
+      //   // 👉 Using nodereal might have a cost (they have a free tier)
+      //   url:
+      //     "https://bsc-mainnet.nodereal.io/v1/" +
+      //     process.env.ARCHIVE_NODE_API_KEY,
+      //   blockNumber: 20242102,
+      // },
+    },
     rinkeby: {
       url: "https://rinkeby.infura.io/v3/" + process.env.INFURA_ID,
       accounts: [
@@ -44,6 +59,26 @@ module.exports = {
     ropsten: {
       url: "https://ropsten.infura.io/v3/" + process.env.INFURA_ID,
       accounts: [process.env.DEPLOYER_PRIVATE_KEY],
+    },
+    bsc_mainnet: {
+      url: "https://bsc-dataseed.binance.org/",
+      chainId: 56,
+      gasPrice: 20000000000,
+      accounts: [
+        process.env.DEPLOYER_PRIVATE_KEY,
+        process.env.HACKER_PRIVATE_KEY,
+        process.env.TESTING_PRIVATE_KEY,
+      ],
+    },
+    bsc_testnet: {
+      url: "https://data-seed-prebsc-1-s1.binance.org:8545",
+      chainId: 97,
+      gasPrice: 20000000000,
+      accounts: [
+        process.env.DEPLOYER_PRIVATE_KEY,
+        process.env.HACKER_PRIVATE_KEY,
+        process.env.TESTING_PRIVATE_KEY,
+      ],
     },
   },
 
