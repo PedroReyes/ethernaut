@@ -20,7 +20,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  defaultNetwork: "rinkeby", // default: "hardhat",
+  defaultNetwork: "bsc_mainnet", // default: "hardhat",
 
   mocha: {
     timeout: 120000,
@@ -35,13 +35,13 @@ module.exports = {
       // `npx hardhat node` for running local node
       // url: "http://localhost:8545",
       // timeout: 520000,
-      // forking: {
-      //   // 👉 Using nodereal might have a cost (they have a free tier)
-      //   url:
-      //     "https://bsc-mainnet.nodereal.io/v1/" +
-      //     process.env.ARCHIVE_NODE_API_KEY,
-      //   blockNumber: 20242102,
-      // },
+      forking: {
+        // 👉 Using nodereal might have a cost (they have a free tier)
+        url:
+          "https://bsc-mainnet.nodereal.io/v1/" +
+          process.env.ARCHIVE_NODE_API_KEY,
+        blockNumber: 20242102,
+      },
     },
     rinkeby: {
       url: "https://rinkeby.infura.io/v3/" + process.env.INFURA_ID,
