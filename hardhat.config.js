@@ -38,6 +38,7 @@ module.exports = {
       // forking: {
       //   // 👉 Using nodereal might have a cost (they have a free tier)
       //   url:
+      // "https://bsc-dataseed.binance.org/"
       //     "https://bsc-mainnet.nodereal.io/v1/" +
       //     process.env.ARCHIVE_NODE_API_KEY,
       //   blockNumber: 20242102,
@@ -61,7 +62,11 @@ module.exports = {
       accounts: [process.env.DEPLOYER_PRIVATE_KEY],
     },
     bsc_mainnet: {
-      url: "https://bsc-dataseed.binance.org/",
+      // url: "https://bitter-long-night.bsc.discover.quiknode.pro/aca3dbc0d63cc000cb615148a901aa405daecd7c/",
+      // url:
+      //   "https://bsc-mainnet.nodereal.io/v1/" +
+      //   process.env.ARCHIVE_NODE_API_KEY,
+      url: "https://bsc-mainnet.nodereal.io/v1/7d0afcdcc4504b06976eba476feb0675",
       chainId: 56,
       gasPrice: 20000000000,
       accounts: [
