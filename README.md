@@ -2,6 +2,10 @@
 
 This project contains the solution for all the challenges in Ethernaut
 
+# Usage
+
+We have code tours in this project so install the next VSCode extension for a better onboarding to the project: https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour
+
 # Basic Sample Hardhat Project
 
 This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
@@ -57,7 +61,7 @@ Run `npx hardhat test test/4_TelephoneTest.js --network hardhat`. You can try in
 Use this bookmarks in order to do a follow up of which functions from a smart contract you already audited:
 
 ```
-// @audit just for testig
+// @audit just for testing
 // @audit-ok message here
 // @audit-issue issue explained here
 // @audit-info message here

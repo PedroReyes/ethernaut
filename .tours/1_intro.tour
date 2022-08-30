@@ -1,0 +1,36 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "1_Intro",
+  "steps": [
+    {
+      "file": "contracts/1_Fallback/Fallback.sol",
+      "description": "This project contains the solution for each of the levels that you can encounter in the Ethernaut game in the next website: https://ethernaut.openzeppelin.com/.\r\n\r\nBefore going any further. Please, install all the dependencies. Execute the next command at the root folder:\r\n\r\n`npm install`\r\n\r\nEach folder is a level containing the code to be hacked and, if needed, the solidity smart contract used for hacking the contract given in that particular level.",
+      "line": 4
+    },
+    {
+      "file": "test/4_TelephoneTest.js",
+      "description": "For every level, unless it is not neeeded, you have a javascript file testing the level in the local hardhat environment. For example, in this case you can use: \r\n\r\n👉 `npx hardhat test test/4_TelephoneTest` ",
+      "line": 4
+    },
+    {
+      "file": "scripts/4_Telephone.js",
+      "description": "For completing the level you can use the javascript files withing the `script` folder. You will have to address the `rinkeby` network by switching the default network in the `hardhat.config.js` file or simply executing the next command adding the network paramter:\r\n\r\n`npx hardhat run scripts/4_Telephone.js --network rinkeby`\r\n\r\nSometimes you might encounter problems with the versioning of files compiled by hardhat. If that is the case, remove the folders `artifacts` and `cache` for fresh start.",
+      "line": 8
+    },
+    {
+      "file": "hardhat.config.js",
+      "description": "Take into account that we are using a private `INFURA_ID`. Please, create your own `.env` file at the root of the workspace and add the next parameter:\r\n\r\n`INFURA_ID=\"Your infura ID here\"`\r\n\r\nYou can get your INFURA id here: https://infura.io/\r\n\r\nPlease, use the `sample.env` file we have located at the root for creating your own `.env` file",
+      "line": 49
+    },
+    {
+      "file": "sample.env",
+      "description": "This is an example of the .env file that you will have to create. Not all the parameters are mandatory. ",
+      "line": 1
+    },
+    {
+      "file": "contracts/13_GatekeeperOne/HackGatekeeperOne.sol",
+      "description": "A few solutions might contain png files that can be visualized. You can also modifying them if you use the next VSCode plugin: https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor.",
+      "line": 22
+    }
+  ]
+}
