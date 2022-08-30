@@ -2,6 +2,7 @@ require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-etherscan");
 const { task } = require("hardhat/config");
 require("dotenv").config();
+require("hardhat-gas-reporter");
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -20,7 +21,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  defaultNetwork: "rinkeby", // default: "hardhat",
+  // defaultNetwork: "rinkeby", // default: "hardhat",
 
   mocha: {
     timeout: 120000,
@@ -62,11 +63,9 @@ module.exports = {
       accounts: [process.env.DEPLOYER_PRIVATE_KEY],
     },
     bsc_mainnet: {
-      // url: "https://bitter-long-night.bsc.discover.quiknode.pro/aca3dbc0d63cc000cb615148a901aa405daecd7c/",
-      // url:
-      //   "https://bsc-mainnet.nodereal.io/v1/" +
-      //   process.env.ARCHIVE_NODE_API_KEY,
-      url: "https://bsc-mainnet.nodereal.io/v1/7d0afcdcc4504b06976eba476feb0675",
+      url:
+        "https://bsc-mainnet.nodereal.io/v1/" +
+        process.env.ARCHIVE_NODE_API_KEY,
       chainId: 56,
       gasPrice: 20000000000,
       accounts: [
@@ -119,5 +118,9 @@ module.exports = {
         },
       },
     ],
+  },
+
+  gasReporter: {
+    enabled: false,
   },
 };
