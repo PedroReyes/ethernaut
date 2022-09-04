@@ -55,7 +55,7 @@ describe("Privacy", function () {
     let locked = await contract.locked();
     console.log("🔑 Lock status before unlocking:", locked);
 
-    // Unlock the contract
+    // ✍ Unlock the contract
     let dataHackedByte16 = await contract.conversion(dataHackedByte32); // Option 1
     dataHackedByte16 = dataHackedByte32
       .toString()
@@ -70,7 +70,6 @@ describe("Privacy", function () {
     console.log("🔑 Lock status after unlocking:", locked);
 
     // ✅ Check if the hack was successful
-    expect(pwdHacked).to.be.eq(pwd);
     expect(locked).to.be.false;
   });
 });
