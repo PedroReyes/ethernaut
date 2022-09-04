@@ -1,5 +1,6 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+const { consoleLogTitleH1, consoleLogMessage } = require("./utils.js");
 
 describe("Force", function () {
   let deployer;
@@ -7,6 +8,8 @@ describe("Force", function () {
   let tester;
 
   it("Should force the transfer of ethers using selfdestruct", async function () {
+    consoleLogTitleH1("Level 7 - Force");
+
     // 🔨 Addresses
     [deployer, hacker, tester] = await ethers.getSigners();
 
@@ -24,8 +27,8 @@ describe("Force", function () {
 
     // 🗣 Logging status
     let forceBalance = await ethers.provider.getBalance(contract.address);
-    console.log("💰 Initial Force.sol balance:", forceBalance);
-    console.log(
+    consoleLogMessage("💰 Initial Force.sol balance:", forceBalance);
+    consoleLogMessage(
       "💰 Hacker balance:",
       await ethers.provider.getBalance(hacker.address)
     );
@@ -107,7 +110,7 @@ describe("Force", function () {
 
     // 🗣 Logging status
     forceBalance = await ethers.provider.getBalance(contract.address);
-    console.log("💰 Force.sol balance:", forceBalance);
+    consoleLogMessage("💰 Force.sol balance:", forceBalance);
 
     // ✅ Check if the hack was successful
     expect(forceBalance.toNumber() > 0).to.be.true;

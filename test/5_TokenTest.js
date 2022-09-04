@@ -1,5 +1,6 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+const { consoleLogTitleH1, consoleLogMessage } = require("./utils.js");
 
 describe("Token", function () {
   let owner;
@@ -7,6 +8,8 @@ describe("Token", function () {
   let hacker2;
 
   it("Should increase hacker balance", async function () {
+    consoleLogTitleH1("Level 5 - Token");
+
     // 🔨 Addresses
     [owner, hacker, hacker2] = await ethers.getSigners();
 
@@ -20,8 +23,8 @@ describe("Token", function () {
     let supply = await token.totalSupply();
     let hackerBalanceBeforeAttack = await token.balanceOf(hacker.address);
 
-    console.log(`💰 Supply:\n ${supply} \n`);
-    console.log(`💰 Hacker balance:\n ${hackerBalanceBeforeAttack} \n`);
+    consoleLogMessage(`💰 Supply:\n ${supply} \n`);
+    consoleLogMessage(`💰 Hacker balance:\n ${hackerBalanceBeforeAttack} \n`);
 
     // 👿 Hacking the contract
     const hackValue = ethers.BigNumber.from(hackerBalanceBeforeAttack)
@@ -37,8 +40,8 @@ describe("Token", function () {
 
     // 🗣 Logging status
     let hackerBalanceAfterAttack = await token.balanceOf(hacker.address);
-    console.log(`💰 Supply:\n ${supply} \n`);
-    console.log(`💰 Hacker balance:\n ${hackerBalanceAfterAttack} \n`);
+    consoleLogMessage(`💰 Supply:\n ${supply} \n`);
+    consoleLogMessage(`💰 Hacker balance:\n ${hackerBalanceAfterAttack} \n`);
 
     // ✅ Check if the hack was successful
     expect(hackerBalanceAfterAttack).to.gt(hackerBalanceBeforeAttack);

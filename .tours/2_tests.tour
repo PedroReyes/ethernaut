@@ -1,0 +1,11 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "2_Tests",
+  "steps": [
+    {
+      "file": "test/utils.js",
+      "description": "You can at any moment turn off the logging of messages in the tests except those coming from the hardhat console.log() that you created in the contracts.",
+      "line": 2
+    }
+  ]
+}

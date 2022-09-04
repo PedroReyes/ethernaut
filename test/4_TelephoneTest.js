@@ -1,11 +1,14 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+const { consoleLogTitleH1 } = require("./utils.js");
 
 describe("Telephone", function () {
   let owner;
   let bob;
 
   it("Should change the owner of Telephone", async function () {
+    consoleLogTitleH1("Level 4 - Telephone");
+
     [owner, bob] = await ethers.getSigners();
 
     const Telephone = await ethers.getContractFactory("Telephone", owner);

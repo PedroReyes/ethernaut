@@ -1,5 +1,6 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+const { consoleLogTitleH1, consoleLogMessage } = require("./utils.js");
 
 describe("King", function () {
   let deployer;
@@ -7,6 +8,8 @@ describe("King", function () {
   let tester;
 
   it("Should not allow Hack.sol to transfer the ether back to the HackKing.sol", async function () {
+    consoleLogTitleH1("Level 9 - King");
+
     // 🔨 Addresses
     [deployer, hacker, tester] = await ethers.getSigners();
 
@@ -32,8 +35,8 @@ describe("King", function () {
     let king = await contract._king();
     let prize = await contract.prize();
     prize = ethers.utils.formatEther(prize);
-    console.log("👑 Initial king:", king);
-    console.log("💰 Initial prize:", prize, " ether\n");
+    consoleLogMessage("👑 Initial king:", king);
+    consoleLogMessage("💰 Initial prize:", prize, " ether\n");
 
     // 👉 Send ether as EOA to HackKing contract ❌
     if (false) {
@@ -47,8 +50,8 @@ describe("King", function () {
       king = await contract._king();
       prize = await contract.prize();
       prize = ethers.utils.formatEther(prize);
-      console.log("👑 Current king:", king);
-      console.log("💰 Current prize:", prize, " ether\n");
+      consoleLogMessage("👑 Current king:", king);
+      consoleLogMessage("💰 Current prize:", prize, " ether\n");
 
       // ✅ Check if the hack was successful
       expect(king).to.be.eq(hacker.address);
@@ -69,8 +72,8 @@ describe("King", function () {
       king = await contract._king();
       prize = await contract.prize();
       prize = ethers.utils.formatEther(prize);
-      console.log("👑 Current king:", king);
-      console.log("💰 Current prize:", prize, " ether\n");
+      consoleLogMessage("👑 Current king:", king);
+      consoleLogMessage("💰 Current prize:", prize, " ether\n");
 
       // ✅ Check if the hack was successful
       expect(king).to.be.eq(hackKing.address);
@@ -88,8 +91,8 @@ describe("King", function () {
       king = await contract._king();
       prize = await contract.prize();
       prize = ethers.utils.formatEther(prize);
-      console.log("👑 Current king:", king);
-      console.log("💰 Current prize:", prize, " ether\n");
+      consoleLogMessage("👑 Current king:", king);
+      consoleLogMessage("💰 Current prize:", prize, " ether\n");
 
       // ✅ Check if the hack was successful
       expect(king).to.be.eq(hackKing.address);

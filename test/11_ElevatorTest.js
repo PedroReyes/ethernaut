@@ -1,6 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 const hre = require("hardhat");
+const { consoleLogTitleH1, consoleLogMessage } = require("./utils.js");
 
 describe("Elevator", function () {
   let deployer;
@@ -8,7 +9,9 @@ describe("Elevator", function () {
   let tester;
 
   before(async function () {
-    console.log(`💻 Network: ${hre.network.name}`);
+    consoleLogTitleH1("Level 11 - Elevator");
+
+    consoleLogMessage(`💻 Network: ${hre.network.name}`);
 
     // 🔨 Addresses
     [deployer, hacker, tester] = await ethers.getSigners();
@@ -31,19 +34,19 @@ describe("Elevator", function () {
     await hackContract.deployed();
 
     // 👿 Hacking the contract
-    console.log("👿 Hacking the contract...");
+    consoleLogMessage("👿 Hacking the contract...");
     tx = await hackContract.connect(hacker).hackElevator();
     tx = await tx.wait((confirms = 1));
 
-    console.log("\n");
-    console.log("👿 Hack hash\n");
-    console.log(tx);
-    console.log("\n");
+    consoleLogMessage("\n");
+    consoleLogMessage("👿 Hack hash\n");
+    consoleLogMessage(tx);
+    consoleLogMessage("\n");
 
     // ✅ Check if the hack was successful
-    console.log("✅ Checking if the hack was successful...");
+    consoleLogMessage("✅ Checking if the hack was successful...");
     let isOnTop = await contract.top();
-    console.log(`👿 Elevator is on top: ${isOnTop}`);
+    consoleLogMessage(`👿 Elevator is on top: ${isOnTop}`);
 
     expect(isOnTop).to.be.true;
   });

@@ -1,10 +1,20 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+const { consoleLogTitleH1, consoleLogMessage } = require("./utils.js");
 
 describe("Privacy", function () {
   let deployer;
   let hacker;
   let tester;
+
+  before(async function () {
+    consoleLogTitleH1("Level 12 - Privacy");
+
+    consoleLogMessage(`💻 Network: ${hre.network.name}`);
+
+    // 🔨 Addresses
+    [deployer, hacker, tester] = await ethers.getSigners();
+  });
 
   it("Should hack the private variable to unlock the contract", async function () {
     // 🔨 Addresses
@@ -12,13 +22,13 @@ describe("Privacy", function () {
 
     const pwd = "password123";
     const pwdByte32 = ethers.utils.formatBytes32String(pwd);
-    console.log("🔑 Initial password (string):", pwd);
+    consoleLogMessage("🔑 Initial password (string):", pwd);
     const data = [
       ethers.utils.formatBytes32String("1"),
       ethers.utils.formatBytes32String("2"),
       pwdByte32,
     ];
-    console.log("🔑 Initial data (byte32):", data);
+    consoleLogMessage("🔑 Initial data (byte32):", data);
 
     // 📗 Contract to be hacked
     const Contract = await ethers.getContractFactory("Privacy", deployer);
@@ -26,15 +36,15 @@ describe("Privacy", function () {
     await contract.deployed();
 
     // 🗣 Logging status
-    console.log("\n\n======================");
-    console.log("👀 Storage");
-    console.log("======================");
+    consoleLogMessage("\n\n======================");
+    consoleLogMessage("👀 Storage");
+    consoleLogMessage("======================");
     let storageValue;
     for (let i = 0; i < 7; i++) {
       storageValue = await ethers.provider.getStorageAt(contract.address, i);
-      console.log(`Index ${i}: ${storageValue}`);
+      consoleLogMessage(`Index ${i}: ${storageValue}`);
     }
-    console.log("======================\n\n");
+    consoleLogMessage("======================\n\n");
 
     // 👿 Hacking the contract
     // 📖 https://docs.ethers.io/v5/api/providers/provider/
@@ -47,13 +57,16 @@ describe("Privacy", function () {
     );
 
     // 🗣 Logging status
-    console.log("🔑 Hacked password (byte32) - value: ", dataHackedByte32);
-    console.log(
+    consoleLogMessage(
+      "🔑 Hacked password (byte32) - value: ",
+      dataHackedByte32
+    );
+    consoleLogMessage(
       "🔑 Hacked password (byte32) - length:",
       ethers.utils.hexDataLength(dataHackedByte32)
     );
     let locked = await contract.locked();
-    console.log("🔑 Lock status before unlocking:", locked);
+    consoleLogMessage("🔑 Lock status before unlocking:", locked);
 
     // ✍ Unlock the contract
     let dataHackedByte16 = await contract.conversion(dataHackedByte32); // Option 1
@@ -61,13 +74,16 @@ describe("Privacy", function () {
       .toString()
       .substring(0, dataHackedByte32.toString().length / 2 + 1); // Option 2
 
-    console.log("🔑 Hacked password (byte16) - value: ", dataHackedByte16);
+    consoleLogMessage(
+      "🔑 Hacked password (byte16) - value: ",
+      dataHackedByte16
+    );
     let unlockTx = await contract.connect(hacker).unlock(dataHackedByte16);
     await unlockTx.wait((confirms = 1));
 
     // 🗣 Logging status
     locked = await contract.locked();
-    console.log("🔑 Lock status after unlocking:", locked);
+    consoleLogMessage("🔑 Lock status after unlocking:", locked);
 
     // ✅ Check if the hack was successful
     expect(locked).to.be.false;

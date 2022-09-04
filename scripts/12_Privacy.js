@@ -1,4 +1,4 @@
-// We require the Hardhat Runtime Environment explicitly here. This is optional
+// We require the Hardhat Runtime Environment explicitly here. This is optionall
 // but useful for running the script in a standalone fashion through `node <script>`.
 //
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat

