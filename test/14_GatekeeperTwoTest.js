@@ -1,6 +1,6 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
-const { consoleLogTitleH1, consoleLogMessage } = require("./utils.js");
+const { consoleLogTitleH1, consoleLogMessage } = require("../utils/utils.js");
 
 describe("GatekeeperTwo", function () {
   let deployer;

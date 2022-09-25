@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 const hre = require("hardhat");
-const { consoleLogTitleH1, consoleLogMessage } = require("./utils.js");
+const { consoleLogTitleH1, consoleLogMessage } = require("../utils/utils.js");
 
 describe("Reentrance", function () {
   let deployer;

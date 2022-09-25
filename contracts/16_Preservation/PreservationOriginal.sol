@@ -35,7 +35,7 @@ contract PreservationOriginal {
 }
 
 // Simple library contract to set the time
-contract LibraryContract {
+contract LibraryContractOriginal {
     // stores a timestamp
     uint256 storedTime;
 
