@@ -14,10 +14,11 @@ async function main() {
 
   // 🗣 Logging addresses
   console.log(`🤓 Hacker address:\n ${hacker.address} \n`);
+  console.log(`🤓 Tester address:\n ${tester.address} \n`);
 
   // 📗 Contract name and address that will be hacked
   const contractName = "NaughtCoin";
-  const contractAddress = "0xdDC3C59848A345188e944F8D9D904b9C35c3Da9a";
+  const contractAddress = "0x9588FAbC707D01E9b00B9B59C0edf4d8cf7c381e";
 
   const contract = await hre.ethers.getContractAt(
     contractName,
