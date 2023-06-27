@@ -3,6 +3,7 @@ require("@nomiclabs/hardhat-etherscan");
 const { task } = require("hardhat/config");
 require("dotenv").config();
 require("hardhat-gas-reporter");
+require("@nomicfoundation/hardhat-foundry");
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -93,7 +94,7 @@ module.exports = {
   solidity: {
     compilers: [
       {
-        version: "0.8.10",
+        version: "0.8.18",
         settings: {
           optimizer: {
             enabled: true,
